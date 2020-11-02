@@ -39,6 +39,14 @@
 
 */
 var max = 255;
+var c;
+
+    getRandomInt(max);
+    var r = getRandomInt(max);
+    var g = getRandomInt(max);
+    var b = getRandomInt(max);
+
+    document.body.style.background = "rgb( " + r + "," + g + "," + b + ")" ;
 
   function getRandomInt(max) {
 
@@ -46,21 +54,26 @@ var max = 255;
 
     }
 
+var div = document.createElement('div');
+var span = document.createElement('span');
+span.style = 'position:absolute;top:50%;width:100%;text-align:center;';
 
-function changeColor( event ){
+  function changeColor(  ){
 
-  getRandomInt(max);
-    var r = getRandomInt(max);
-    var g = getRandomInt(max);
-    var b = getRandomInt(max);
+      getRandomInt(max);
+          var r = getRandomInt(max);
+          var g = getRandomInt(max);
+          var b = getRandomInt(max);
   
-  document.body.style.background = "rgb( " + r + "," + g + "," + b + ")" ;
+        document.body.style.background = "rgb( " + r + "," + g + "," + b + ")" ;
+
+      var c = r + "," + g + "," + b ;
+      span.innerText = 'now color of background ' + c;
+  }
   
-}
+ div.appendChild(span);
+document.body.appendChild(div);
 
-// var div = document.createElement('div');
-
-//     div.innerText = 'now color of background'  + r + "," + g + "," + b;
 
 
 
