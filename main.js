@@ -39,7 +39,15 @@ var c;
     var g = getRandomInt(max);
     var b = getRandomInt(max);
 
-    document.body.style.background = "rgb( " + r + "," + g + "," + b + ")" ;
+    var div = document.createElement('div');
+    var span = document.createElement('span');
+    span.style = 'position:absolute;top:50%;width:100%;text-align:center;';
+
+
+    document.body.style.background = "#" + Number(r).toString( 16 ) + Number(g).toString( 16 ) + Number(b).toString( 16 ) ;
+    var c = Number(r).toString( 16 ) + Number(g).toString( 16 ) + Number(b).toString( 16 );
+    span.innerText = 'now color of background #' + c ;
+  
 
   function getRandomInt(max) {
 
@@ -47,9 +55,6 @@ var c;
 
     }
 
-var div = document.createElement('div');
-var span = document.createElement('span');
-span.style = 'position:absolute;top:50%;width:100%;text-align:center;';
 
   function changeColor(  ){
 
