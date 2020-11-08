@@ -46,14 +46,6 @@
 
       Задание:
       На каждую из конопок назначить действие которое будет выполнять следующее действие:
-    
-
-    
-
-      
-
-
-
     */
 
     var mouseHover = document.getElementById('mouseHover');
@@ -209,22 +201,45 @@
 
     var counter = 0;
     keyboardButton.onkeydown = function(e){
-      document.addEventListener('keydown', logKey);
 
-      console.log(logKey);
+
+      if(!keyboardResult.keydown){
+
+          counter++;
+          keyboardResult.textContent = counter;
+
+          if(counter == 1){
+              keyboardResult.classList.add('one')
+          }else if(counter == 3 ){
+            keyboardResult.classList.remove('one')
+            keyboardResult.classList.add('three')
+          }else if(counter == 5){
+            keyboardResult.classList.remove('three')
+            keyboardResult.classList.add('five')
+          }else if(counter == 11){
+            keyboardResult.classList.remove('five')
+            keyboardResult.classList.add('one'+'one')
+          }else if(counter == 115){
+            keyboardResult.classList.remove('oneone')
+            keyboardResult.classList.add('oneonefive')
+          }
+      }
+      //document.addEventListener('keydown', logKey);
+
+      // console.log(logKey);
 
   
 
-          var keyboardResult = document.getElementById('keyboardResult');
+      //     var keyboardResult = document.getElementById('keyboardResult');
           
                    
-          function logKey() {
-              keyboardResult.textContent = counter;
-          }   
-          logKey();
+      //     function logKey() {
+      //         keyboardResult.textContent = counter;
+      //     }   
+      //     logKey();
         
-        
-        console.log(keyboardResult)
+        console.log(counter)
+         console.log(keyboardResult)
         console.log('keydown');
     }
   </script>

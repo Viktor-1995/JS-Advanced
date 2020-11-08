@@ -38,3 +38,56 @@
       }
 
   */
+var button = document.querySelectorAll('.showButton');
+var buttonArray = Array.from(button);
+
+// // console.log(buttonArray);
+//   for(var i = 0; i < buttonArray.length;i++){}
+
+var container = document.querySelectorAll('.tab');
+var containerArray = Array.from(container);
+ 
+     // var button1 = document.
+     
+    for(var item of buttonArray){ 
+
+        item.onclick = function( e ){
+
+            var buttonn = e.target.dataset.tab
+            console.log(buttonn);
+
+            for(var itemCont of containerArray){
+
+                var tabContainer = itemCont.dataset.tab;
+                if(tabContainer == buttonn){
+                  console.log(tabContainer);
+                  
+                  itemCont.classList.toggle('active'); 
+
+                }  
+            }
+
+            for(var itemCont of containerArray){
+
+              var tabContainer = itemCont.dataset.tab;
+
+                  if(itemCont.classList.contains("active") && tabContainer == 3){ 
+                    
+                     for(var itemCont of containerArray){
+                         if(itemCont.classList.contains("active")){
+                              setTimeout(hide ,3000)
+                              console.log(container)
+                            }
+                    }          
+              }
+            }  
+
+        }
+       
+    }
+  
+    var hide = function(){ 
+      for(var itemCont of containerArray){
+          itemCont.classList.remove('active')
+      } 
+    }

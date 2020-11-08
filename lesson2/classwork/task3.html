@@ -28,11 +28,65 @@
     /*
 
       Задача: Сделать корректно работающее всплывающее окно.
-      Условие: Узменять HTML разметку выше - нельзя.
+      Условие: Изменять HTML разметку выше - нельзя.
       При нажании на одну из кнопок, должно открытся окно с соответствующим data- аттрибутом.
       При нажатии на кнопку close окно дожно закрываться.
 
     */
+        var pop1 = document.querySelectorAll('.popup__button');
+        var buttonArray = Array.from(pop1);
+
+        var popHide = document.querySelectorAll('.popup__item');
+        var popArray = Array.from(popHide);
+
+      for (var i = 0; i < buttonArray.length; i++) {
+             buttonArray[i].addEventListener('click', popup_button);
+      }
+
+      function popup_button(e){
+
+              var popup1 = e.target.dataset.popup;
+
+            for(var item of popArray){
+              //  console.log(item.dataset.popup)
+                var popup11 = item.dataset.popup
+               // console.log(popup1)
+              if(popup1 == item.dataset.popup){
+                var popup = document.getElementById('popup');
+                popup.classList.toggle('show');
+                item.classList.toggle('show');
+              }
+             
+            }
+      //}    
+  //  console.log(popup1)
+  //  console.log(popHide)
+  //  console.log(popArray)
+      }
+  
+
+        var closeButton = document.getElementById('popup__close');
+
+        closeButton.onclick = function(){
+     
+          for(var item1 of buttonArray){
+             
+              console.log(item1.dataset.popup)
+              var popup1 = item1.dataset.popup;
+
+            var popup = document.getElementById('popup');
+            popup.classList.remove('show');
+
+            for(var item of popArray){
+                 
+              if(popup1 == item.dataset.popup){
+                    item.classList.remove('show');
+                  
+              }
+            }
+          } 
+        }
+    
   </script>
 </body>
 </html>
