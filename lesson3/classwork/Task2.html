@@ -20,6 +20,7 @@
 
       </div>
     </div>
+  
     <script>
       /*
         Задание:
@@ -33,7 +34,7 @@
         Под иконкой расположить еще одну кнопку, по нажатию на которую из соответствующего массива
         подтягивается случайная картинка с изображением в блок result.
         Предыдущий результат очищается.
-
+*/
         var houseArray = [
         "https://static.pexels.com/photos/106399/pexels-photo-106399.jpeg",
         "https://i.pinimg.com/736x/7f/be/50/7fbe50ec634c65709d7fe6ac267c4e6f--large-garage-plans-house-plans-large-family.jpg",
@@ -50,7 +51,7 @@
         "http://www.atzmut.com/wp-content/uploads/2016/01/tree.jpg"
       ];
 
-      */
+    
 
       var buttonss = document.querySelectorAll('button');
       var buttons = Array.from(buttonss)
@@ -65,32 +66,146 @@
         plane: 'https://image.flaticon.com/icons/svg/579/579268.svg'
       }
 
-      function showIcon(e){
-        var val = e.target.innerText.toLowerCase();
-        console.log(e);
+      // function showIcon(e){
+      //   var val = e.target.innerText.toLowerCase();
+      //   console.log(e);
 
-      }
-
+      // }
+      
       // buttons.forEach( (btn) => {
       //   //alert('working')
       // })
+      
+      var img =  document.createElement('img');
+      img.setAttribute('style','height:200px;width:200px')
 
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', buttons1 );
+      var secondButton = document.createElement('button');
+      secondButton.innerText = 'push here';
+   
+          chooseYourBlock.appendChild(img) 
+          chooseYourBlock.appendChild(secondButton)
 
-  }
-      function buttons1(){
+          var result = document.getElementById('result')  
 
-         var img =  document.createElement('img')
-         img.setAttribute('src', iconsObj[i]);
+        for(var item of buttons){
+          
+              item.onclick = function(e){
+                  
+                  var innerText  = e.target.innerText.toLowerCase();
+                  console.log(innerText);
 
-        // var button = document.createElement('button');
-        // button.setAttribute('id', )
+                  if(innerText === 'house'){
+                    var q = iconsObj.house;
+                    i = 1;
+                    console.log(q)
+                  }else if(innerText === 'tree'){
+                    var q = iconsObj.tree;
+                    i = 2;
+                    console.log(q);
+                  }else if(innerText === 'plane'){
+                    var q = iconsObj.plane;
+                    i = 3;
+                    console.log(q);
+                  }
+                  img.setAttribute('src', q);
+                  secondButton.setAttribute('id',i) 
 
-         var chooseYourBlock = document.getElementById('chooseYourBlock')
-         chooseYourBlock.appendChild(img) 
+                   console.log(result.classList.contains('img')) 
+                 if(result.querySelector('.img')){
+                   for(var  i = 0;i < 3;i++ ){
+                 var elem = result.querySelector('img');
+                 elem.remove()
+                   }
+                 }
+        
+              }
+      
+        }
+        secondButton.addEventListener('click', button2);
+                 
+        function button2(){
+          
+          var pushHere = secondButton.id;
+          switch(pushHere){
+            case '1': for(var c = 0; c < 3; c++){
+              
+                     var img = document.createElement('img');
+                      var a =  houseArray[c];
+                     img.src = a;
+                     img.id = c;
+                     img.className = 'img'; 
+                     img.style = 'height:200px;width:200px'
+                     result.appendChild(img);
 
-      }
+                    }
+                    break;
+            case '2': for(var c = 0; c < 3; c++){
+              var img = document.createElement('img');
+                      var a =  treeArray[c];
+                     img.src = a;
+                     img.id = c;
+                     img.className = 'img'; 
+                     img.style = 'height:200px;width:200px'
+                     result.appendChild(img);
+                    }
+                    break;
+            case '3':for(var c = 0; c < 3; c++){
+                      var img = document.createElement('img');
+                      var a =  planeArray[c];
+                       img.src = a;
+                       img.id = c;
+                       img.className = 'img'; 
+                       img.style = 'height:200px;width:200px'
+                       result.appendChild(img);
+                    }        
+                    break;               
+          }
+
+
+
+        }
+
+
+
+
+
+  //     for (var i = 0; i < buttons.length; i++) {
+  //       buttons[i].addEventListener('click', buttons1 );
+  //       console.log(buttons[i]);
+  // }
+
+  //     function buttons1(){
+
+  //        var img =  document.createElement('img')
+  //         // for(var i = 0; i < 3;i++){ 
+  //         //   var image = buttons[i].id;
+  //         //   console.log(image)
+
+  //           img.setAttribute('src', showIcon());
+        
+  //        //}
+  //        var secondButton = document.createElement('button');
+  //        secondButton.innerText = 'push here';
+  //        secondButton.setAttribute('id', 'nextbutton')
+         
+  //       // var button = document.createElement('button');
+  //       // button.setAttribute('id', )
+  //       var chooseYourBlock = document.getElementById('chooseYourBlock')
+        
+  //       if(!document.getElementById('nextbutton') && !chooseYourBlock.img){
+
+         
+  //        chooseYourBlock.appendChild(img) 
+  //        chooseYourBlock.appendChild(secondButton) 
+  //       }  else{
+
+
+
+  //       }
+
+        
+
+  //     }
 
 
     </script>

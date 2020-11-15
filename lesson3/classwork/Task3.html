@@ -80,12 +80,58 @@
 
       */
 
-      var containers = document.querySelectorAll('.roadMap__container');
-          containers.forEach( function( container ){
-            console.log( container );
-            var ball = container.querySelector('.ball');
-            console.log( ball.dataset.id );
-          })
+var containers = document.querySelectorAll('.roadMap__container');
+
+containers.forEach( function (container){
+    var roadMap = container.querySelector('.roadMap');    
+    var navButton = container.querySelectorAll('.navButton');
+    var roadMapPoints = roadMap.querySelectorAll('.roadMapPoint');   
+
+    for(var i = 0; i < navButton.length;i++){
+      navButton[i].addEventListener('click', function navButtons(e){
+        var direction = e.target.dataset.direction;
+        // console.log(direction);
+        // console.log(roadMapPoints);
+        var activeBall = container.querySelector('.ball')
+        var activeBallId = activeBall.dataset.id;
+        console.log(activeBallId)
+        roadMapPoints.forEach(function(activeId){
+          var moveId = activeId.dataset.id;
+          // console.log(moveId)
+          // console.log(roadMapPoints.length)
+            if(activeBallId == moveId){
+              // console.log(moveId)
+              // console.log(roadMapPoints.length)
+              activeBall.classList.remove('ball');
+            }     
+              if(direction === '<'){
+                var nextBallId = activeBall.dataset.id - 1;
+              }else if(direction === '>'){
+                var q = activeBall.dataset.id;
+                var nextBallId = +q + 1;
+              }else{
+                alert('error')
+              } 
+              var roadMapPointsArray = Array.from(roadMapPoints);
+              console.log(nextBallId)
+              if(0 < nextBallId && nextBallId < roadMapPointsArray.length + 1){       
+                for(var i = 0;i < roadMapPointsArray.length; i++){
+                      var roadMapId = roadMapPointsArray[i].dataset.id
+                      console.log(roadMapId)
+                  if(roadMapId == nextBallId){ 
+                      roadMapPointsArray[i].classList.add('ball');
+                  break;   
+                  }
+                }
+              }else{
+                activeBall.classList.add('ball');
+              }
+        })
+      })  
+  }
+})
+
+
 
     </script>
   </body>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+        Создать список дел, в который можно:
+        - Добавить новый элемент
+        - Удалить элемент
+        - Задать что пункт выполнен
+
+      Шаблон элемента:
+        <li class="listItem">
+            <input type="checkbox" class="DoneCheckbox" />
+            <span class="TodoText">{add text}</span>
+            <button>Remove</button>
+        </li>
+
+    */
+    window.addEventListener("DOMContentLoaded", function () {
+
+        var addButton = document.getElementById('AddToDo');
+
+        addButton.addEventListener('click', function(e){
+        
+          var newToDo = document.getElementById('newToDo').value;
+          //console.log(newToDo);
+          var toDoList = document.getElementById('toDoList');
+          var li = document.createElement('li');
+              li.className = 'listItem';
+
+          var input = document.createElement('input')
+              input.type = 'checkbox';
+              input.className = 'doneCheckbox';
+
+          var span = document.createElement('span');
+              span.className = 'toDoText';
+              span.innerText = newToDo;
+
+          var button = document.createElement('button');                          
+              button.innerText = 'remove'
+          li.appendChild(input);
+          li.appendChild(span);
+          li.appendChild(button);
+          toDoList.appendChild(li);
+         
+        
+          var listItems = document.querySelectorAll('.listItem');
+          var listItemArray = Array.from(listItems);
+          //console.log(listItems)
+
+          for(var i = 0;i < listItemArray.length; i++ ){
+             
+              var removeButton = listItemArray[i].querySelector('button');
+              var span =  listItemArray[i].querySelector('span');
+              var spanText = span.innerText;
+            };    
+
+          var liRemove = document.getElementById('ToDoList')
+            removeButton.addEventListener('click', function(e){
+                //console.log(spanText);
+                toDoList.removeChild(li)
+            });
+             
+        })  
+      
+    })      
+ 
+  </script>
+</head>
+<body>
+    <header>
+      <input id="newToDo" class="textInput"/>
+      <input id="AddToDo" class="addButton" type="button" value="Add"/>
+    </header>
+    <ul id="toDoList">
+
+        <!-- <li class="listItem">
+            <input type="checkbox" class="DoneCheckbox" />
+            <span class="TodoText">{add text}</span>
+            <button id ='remove'>Remove</button>
+        </li> -->
+    </ul>
+
+  <style>
+    .done{
+      text-decoration: line-through;
+    }
+    .textInput{
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .addButton{
+      box-sizing: border-box;
+      padding: 10px 20px;
+      background: #ffcc00;
+    }
+
+    .DoneCheckbox,
+    .TodoText{
+      margin-right: 5px;
+    }
+
+    button{
+      background: red;
+      color: #fff;
+      padding: 5px 10px;
+    }
+  </style>
+</body>
+</html>
