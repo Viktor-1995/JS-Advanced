@@ -52,32 +52,23 @@
 //  },false)
 
     
-     window.addEventListener('DOMContentLoaded', function(){
+     window.addEventListener('load', function(){
 
         var myForm = document.getElementById('myForm')
         var submit = document.getElementById('submit');
-        var check = document.getElementById('test_btn');
         console.log(myForm)
-        var name = myForm.elements.name;
-        var email = myForm.elements.email;
-        var password = myForm.elements.password;
-        var howMuchApples = myForm.elements.howMuchApples;
-        var thanks = myForm.elements.thanks;
+        var name = document.getElementById('nameId');       
         var agree = myForm.elements.agree;
-
-        // name.addEventListener('change', function(){
         name.addEventListener('change', function(){
-             if(name.validity.tooShort){
-                name.setCustomValidity('Too short');
+              if(name.validity.tooShort){
+                name.setCustomValidity('Too short'); 
                 console.log('hyeta')
             }else{
                 console.log('zaebok')
             name.setCustomValidity('perfect')
-            }
-            
+            }       
         })   
-       
-        
+
         agree.addEventListener('click',function(){
             if(agree.checked){
               submit.disabled = false;      
@@ -85,8 +76,9 @@
               alert()  
               submit.disabled = true;
             };
+             console.log(myForm.checkValidity())
           },false)
-        
+        })  
     // function checkName(nameValue){
            
     // }   
@@ -169,4 +161,4 @@
 
 
         }, false)  */
-     })
+   
