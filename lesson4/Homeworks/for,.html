@@ -4,21 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
- 
 
-// В JavaScript вы вызываете метод setCustomValidity():
-
-var email = document.getElementById("mail");
-
-email.addEventListener("input", function (event) {
-  if (email.validity.typeMismatch) {
-    email.setCustomValidity("I expect an e-mail, darling!");
-  } else {
-    email.setCustomValidity("");
-  }
-});
-    </script>
 </head>
 <body>
     <form>
@@ -26,5 +12,20 @@ email.addEventListener("input", function (event) {
         <input type="email" id="mail" name="mail">
         <button>Submit</button>
       </form>
+      <script>
+ 
+
+        // В JavaScript вы вызываете метод setCustomValidity():
+        
+        var email = document.getElementById("mail");
+        
+        email.addEventListener("input", function (event) {
+          if (email.validity.typeMismatch) {
+            email.setCustomValidity("I expect an e-mail, darling!");
+          } else {
+            email.setCustomValidity("");
+          }
+        });
+            </script>
 </body>
 </html>

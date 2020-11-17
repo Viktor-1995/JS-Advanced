@@ -51,25 +51,30 @@
 
 //  },false)
 
-    
-     window.addEventListener('load', function(){
+    "use strict"
+     window.addEventListener('DOMContentLoaded', function(){
 
         var myForm = document.getElementById('myForm')
         var submit = document.getElementById('submit');
         console.log(myForm)
-        var name = document.getElementById('nameId');       
+        var name = myForm.elements.name;      
         var agree = myForm.elements.agree;
-        name.addEventListener('change', function(){
-              if(name.validity.tooShort){
-                name.setCustomValidity('Too short'); 
-                console.log('hyeta')
-            }else{
-                console.log('zaebok')
-            name.setCustomValidity('perfect')
-            }       
-        })   
+        var email = myForm.elements.email;
+        var check = document.getElementById("test_btn")
+        var pass = myForm.elements.password;
+        var howMuchApples = myForm.elements.howMuchApples
 
-        agree.addEventListener('click',function(){
+        // name.addEventListener('input', function(event){
+            
+        //       if(!name.validity.valid){
+        //         name.setCustomValidity('Too short'); 
+        //     }else{
+        //         name.setCustomValidity('perfect')
+        //     }       
+        // });   
+
+        agree.addEventListener('click',function(e){
+            var agree = myForm.elements.agree; 
             if(agree.checked){
               submit.disabled = false;      
             }else{
@@ -78,7 +83,46 @@
             };
              console.log(myForm.checkValidity())
           },false)
+      
+
+        email.addEventListener("input", function (event) {
+            if (email.validity.typeMismatch) {
+              email.setCustomValidity("I expect an e-mail, darling!");
+            } else {
+              email.setCustomValidity("");
+            }
+          });
+        
+        check.addEventListener('click', function(event){
+            if(name.validity.valid){
+                console.log('Good name')
+            }else{
+                
+                console.log(' Bad name ')
+                name.setCustomValidity("Too short")
+            }
+            if (!email.validity.valid) {
+                email.setCustomValidity("I expect an e-mail, darling!");
+                console.log('Bad email')
+            } else {
+                email.setCustomValidity("");
+                console.log('Good email')
+              }
+             if(pass.validity.valid){
+                 console.log('good  password')
+             } else{
+                 console.log('bad password')
+             }
+             if(howMuchApples.validity.valid){
+                console.log('good  Apples')
+             }else {
+                 console.log('bad Apples')
+             }
         })  
+
+
+
+
     // function checkName(nameValue){
            
     // }   
@@ -161,4 +205,4 @@
 
 
         }, false)  */
-   
+    }) 
