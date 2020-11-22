@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<body>
+      <!--
+        Создайте счетчик секунд, который начинает отчет с 1 и заканчивается на 30,
+        также добавьте кнопки который останавливают отчет, и запускают его заново и добавьте кнопку обнуляющую отчет.
+        Также попробуйте изменить код так чтобы отчет начиналься с 30 и заканчивалься на 1.
+
+       + бонус: Сделать так что бы на каждый тик (1с/2c) менялся цвет фона. Можно на основе генератора случайного цвета с предудущих уроков.
+       + бонус: Сделать визуализацию стрелки которая идет по кругу
+            document.getElementById("myDIV").style.transform = "rotate(7deg)";
+
+       + бонус: Сделать кнопки которые выбирают режим в котором идет отсчет - обычный от 0 до 30 или реверсивный от 30 до 0
+      -->
+      <script>
+
+
+        var div = document.createElement('div');
+      
+        var startButton = document.createElement('button');
+        startButton.id = 'startButton';
+        startButton.innerText = 'Start Count';
+        var stopButton = document.createElement('button');
+        stopButton.id = 'stopButton';
+        stopButton.innerText = 'Stop Count';
+        var reverseButton = document.createElement('button');
+        reverseButton.id = 'reverseButton';
+        reverseButton.innerText = 'Reverse Count '
+        document.body.appendChild(reverseButton);
+        document.body.appendChild(startButton);
+        document.body.appendChild(stopButton);
+
+        var myDiv = document.createElement('div');
+        myDiv.id = 'myDiv';
+        myDiv.style = 'height: 10px;width:50px;margin:20px;border-radius:2px;background-color: black;';
+        document.body.appendChild(myDiv);
+
+        var stop = document.getElementById('stopButton');
+        var start = document.getElementById('startButton');
+        var reverse = document.getElementById('reverseButton');
+        var max = 255;
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        
+        const colorRandomBack = () => {
+          var r = getRandomInt(max);
+          var g = getRandomInt(max);
+          var b = getRandomInt(max);
+          document.getElementById("myDiv").style.background = "#" + Number(r).toString( 16 ) + Number(g).toString( 16 ) + Number(b).toString( 16 ) ;
+
+        }
+
+        start.addEventListener('click', () => {
+          var i = 0;
+          const timerCount = () => {                 
+                   if( i > 29){
+                     return;
+                   }else{
+                     console.log('Hello', i )
+                     i++;
+                     div.innerText = i;
+                    colorRandomBack();
+                    document.getElementById("myDiv").style.transform = `rotate(${i*6}deg)`;
+                     document.body.appendChild(div)
+                   }
+                 }
+          var timer = setInterval( timerCount, 1000);
+
+        stop.addEventListener('click', function ()  {
+           clearInterval( timer );
+          })
+        } );
+       
+        reverse.addEventListener('click',() => {
+          var i = 31;
+          const timerCountReverse = () => {
+            if(i < 1){
+               return;
+              }else {
+                console.log('Hello', i )
+                     i--;
+                     div.innerText = i;
+                     colorRandomBack();
+                     document.getElementById("myDiv").style.transform = `rotate(${i*5}deg)`;
+                     document.body.appendChild(div)
+              }
+              
+          }
+          var timer = setInterval( timerCountReverse , 1000);
+          stop.addEventListener('click', function ()  {
+           clearInterval( timer );
+          })
+        })  
+
+        
+      
+
+
+
+
+      </script>
+</body>
+</html>

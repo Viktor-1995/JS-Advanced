@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+
+    <script>
+
+    /*
+      Задание:
+      1. При помощи методов изложеных ниже, переформатировать ITEA_COURSES в массив который содержит длину строк каждого из элементов.
+      2. Отфильтровать массив ITEA_COURSES по алфавиту.
+          + Бонусный бал. Вывести на страничку списком
+      3. Реализация функции поиска по массиву ITEA_COURSES.
+          + Бонусный бал. Вывести на страничку инпут и кнопку по которой будет срабатывать поиск.
+    */
+
+    const ITEA_COURSES = ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+
+    /*
+      Задание 2:
+      Написать фильтр массива по:
+      Актеру, продолжительности
+
+      Бонус:
+        Сделать графическую оболочку для программы:
+        - Селект со списком актеров
+        - Селект или инпут с продолжительностью
+        - Результат в виде списка фильмов
+    */
+
+      var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+      var movies = [
+            {
+              name: "Lord of the Rigs",
+              duration: 240,
+              starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
+            },
+            {
+              name: "Star Wars: Episode I - The Phantom Menace",
+              duration: 136,
+              starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
+            },
+            {
+              name: "Fargo",
+              duration: 100,
+              starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+            },
+            {
+            name: "V for Vendetta",
+            duration: 150,
+            starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
+          }
+        ];
+
+  var lengthArray = [];
+  for(var i = 0; i < ITEA_COURSES.length; i++){   
+      var lengthOfItem = ITEA_COURSES[i].length;
+      lengthArray.push(lengthOfItem);
+  }
+  console.log(lengthArray);
+
+  var sortedArray = ITEA_COURSES.sort();
+  console.log(sortedArray);
+
+  document.addEventListener('DOMContentLoaded', () => {
+      var ul = document.createElement('ul');
+      document.body.appendChild(ul);
+
+    sortedArray.forEach( (item) => {
+      var li = document.createElement('li');
+      li.innerText = item;
+      ul.appendChild(li);
+    })
+
+    var input = document.createElement('input');
+        input.type = 'text';
+    var searchButton = document.createElement('button');
+        searchButton.innerText = 'Search'
+    document.body.appendChild(input);
+    document.body.appendChild(searchButton);
+    var div = document.createElement('div');
+
+    searchButton.addEventListener('click', (e) => {
+        var value = input.value;
+        var searchIndex = ITEA_COURSES.indexOf(value);
+        var searchedValue = ITEA_COURSES[searchIndex]
+     
+            div.innerText = `Индекс елемента который вы ищете ${searchIndex + 1} и значение ${searchedValue}`
+        document.body.appendChild(div);
+        console.log(searchedValue);
+    })
+  
+    var divFilter = document.createElement('div');
+    var selectActor = document.createElement('select');
+    var selectTime = document.createElement('select');
+    divFilter.appendChild(selectActor);
+    divFilter.appendChild(selectTime);
+    document.body.appendChild(divFilter);
+
+    var emptyOption = new Option('Select', null, true, true);
+        emptyOption.disabled = true;
+    selectTime.appendChild(emptyOption);
+    var emptyOption1 = new Option('Select', null, true, true);
+        emptyOption1.disabled = true;
+    selectActor.appendChild(emptyOption1);
+
+   stars.forEach( (star) => {
+          var starOption = new Option(star);
+          selectActor.appendChild(starOption);
+    })
+    
+    var timeArray = [];
+  for(var i = 0; i < movies.length; i++){
+      var duration = movies[i].duration;
+      timeArray.push(duration)
+      var durationOption = new Option(duration);
+      selectTime.appendChild(durationOption); 
+  }
+
+    console.log( timeArray);
+    var filteredMovies = [];
+    var span = document.createElement('span');
+
+  const showFilteredMovies = (movie) => {
+ if(divFilter.querySelector('span') ) {
+    var arr = divFilter.querySelectorAll('span')
+  for(var w = 0;w < arr.length;w++){
+    divFilter.removeChild(divFilter.querySelector('span'))
+  }
+   
+  }
+ 
+ for(var i = 0; i < movie.length;i++ ){
+     
+      var text = document.createElement('span');
+      text.innerText = (i + 1) + ') ' + movie[i].name + ' ';
+      divFilter.appendChild(text)
+      }
+      // divFilter.appendChild(text)
+  }  
+
+   selectActor.addEventListener('change', function(e){
+      var actor = e.target.value
+    
+    filteredMovies.length = 0;
+        for(var q = 0;q < movies.length;q++ ){
+            if(movies[q].starring.includes(actor)){
+              filteredMovies.push(movies[q])
+            }
+        }
+      showFilteredMovies  (filteredMovies);
+      console.log(filteredMovies)
+   })
+    
+   selectTime.addEventListener('change', function(e){
+      var time = e.target.value;
+      filteredMovies.length = 0;
+        for(var q = 0;q < movies.length;q++ ){
+            if(movies[q].duration == time){
+              filteredMovies.push(movies[q])
+            }
+        }
+        console.log(filteredMovies)
+        showFilteredMovies  (filteredMovies);
+   })
+  
+
+
+})
+          
+          
+
+
+
+
+    </script>
+</head>
+<body>
+  
+</body>
+</html>

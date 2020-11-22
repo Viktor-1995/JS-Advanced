@@ -26,7 +26,7 @@
 
 
 */
-window.addEventListener('load', function(){
+window.addEventListener('DOMContentLoaded', function(){
 function Comment(name, text, url){
     this.name = name;
     this.text = text;
@@ -34,41 +34,59 @@ function Comment(name, text, url){
     this.likes = 0;
     } 
 
-// console.log(Commentary.prototype)
+    Comment.prototype = {
+      avatarUrl : 'url.jpg',
+      addLikes : function addLikes (){
+        this.likes++;
+      }
+    }
+
+
 var comment1 = new Comment('name1', 'text1');
     comment1.avatarUrl = 'url1'; 
 var comment2 = new Comment('name2', 'text2', 'url2');
 var comment3 = new Comment('name3', 'text3', 'url3');
 var comment4 = new Comment('name4', 'text4', 'url4');
 
-var first = {
-  name: 'ww',
-  text: 'yess',
-  likes: 0,
-}
 
-Object.setPrototypeOf(first, comment1)
-
-console.log(first);
-console.log(comment1);
-console.log(first.avatarUrl);
 
 var commentsArray = [comment1, comment2, comment3, comment4];
-var div = document.getElementById('CommentsFeed');
+var showComments = document.getElementById('CommentsFeed');
      
-function viewComments (array){
+function viewComments (commentsArray){
+  
+      commentsArray.forEach( comment => {
+        let div = document.createElement('div');
+  
+        let title = document.createElement('h3');
+        title.innerText = comment.name;
+        div.appendChild(title);
+  
+        let description = document.createElement('p');
+        description.innerText = comment.text;
+        div.appendChild(description); 
+  
+        let avatar = document.createElement('img');
+        avatar.src = comment.avatarUrl;
+        div.appendChild(avatar);
+  
+        let likes = document.createElement('div');
+        likes.className = 'like';
+        likes.innerText = comment.likes;
+        div.appendChild(likes);
+  
+        div.addEventListener('click', function() {
+          console.log('dick')
+          comment.addLikes();
+          div.querySelector('.like').innerHTML = comment.likes;
+          console.log(comment.likes)
+        })
+  
+        showComments.appendChild(div);      
+      })
     
-
-    for(var i = 0; i < array.length; i++){
-        var divv = document.createElement('div');     
-        Arr = array[i];
-       
-        divv.innerText = Arr.name +' ' + Arr.text +' ' +  Arr.avatarUrl +' ' +  Arr.likes;
-        div.appendChild(divv)
-        console.log(Arr.name)
-       
-    }
     
 }
+
 viewComments(commentsArray)
 })

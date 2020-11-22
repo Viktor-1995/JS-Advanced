@@ -51,7 +51,7 @@
 
 //  },false)
 
-    "use strict"
+    // "use strict"
      window.addEventListener('DOMContentLoaded', function(){
 
         var myForm = document.getElementById('myForm')
@@ -64,26 +64,14 @@
         var pass = myForm.elements.password;
         var howMuchApples = myForm.elements.howMuchApples
 
-        // name.addEventListener('input', function(event){
+        name.addEventListener('input', function(event){
             
-        //       if(!name.validity.valid){
-        //         name.setCustomValidity('Too short'); 
-        //     }else{
-        //         name.setCustomValidity('perfect')
-        //     }       
-        // });   
-
-        agree.addEventListener('click',function(e){
-            var agree = myForm.elements.agree; 
-            if(agree.checked){
-              submit.disabled = false;      
+              if(!name.validity.valid){
+                name.setCustomValidity('Name please'); 
             }else{
-              alert()  
-              submit.disabled = true;
-            };
-             console.log(myForm.checkValidity())
-          },false)
-      
+                name.setCustomValidity('')
+            }       
+        });        
 
         email.addEventListener("input", function (event) {
             if (email.validity.typeMismatch) {
@@ -92,12 +80,30 @@
               email.setCustomValidity("");
             }
           });
+
+        agree.addEventListener('click',function(e){
+            var agree = myForm.elements.agree; 
+            if(agree.checked){
+            submit.disabled = false;      
+            }else{
+            alert()  
+            submit.disabled = true;
+            };
+            console.log(myForm.checkValidity())
+        },false)
+
+        var cleanValidationMessage = function() {
+            let arrOfInputs = Array.from(myForm.elements);
+            arrOfInputs.forEach( item => {
+                item.setCustomValidity('');
+            })
+        }
         
         check.addEventListener('click', function(event){
+            cleanValidationMessage();
             if(name.validity.valid){
                 console.log('Good name')
             }else{
-                
                 console.log(' Bad name ')
                 name.setCustomValidity("Too short")
             }
@@ -105,17 +111,19 @@
                 email.setCustomValidity("I expect an e-mail, darling!");
                 console.log('Bad email')
             } else {
-                email.setCustomValidity("");
+                
                 console.log('Good email')
               }
              if(pass.validity.valid){
                  console.log('good  password')
              } else{
+                 pass.setCustomValidity('I will keep silent!')
                  console.log('bad password')
              }
              if(howMuchApples.validity.valid){
                 console.log('good  Apples')
              }else {
+                 howMuchApples.setCustomValidity('please eat some apples ')
                  console.log('bad Apples')
              }
         })  
@@ -123,86 +131,5 @@
 
 
 
-    // function checkName(nameValue){
-           
-    // }   
- /*   function checkEmail(){
-        if(email.validity.tooShort || email.validity.typeMismatch){   
-            email.setCustomValidity("Ну и зря, не получишь бандероль с яблоками!");
-            alert("Ну и зря, не получишь бандероль с яблоками!");
-        }     
-    }
-    function checkPass(){
-        if(password == ''){
-            password.setCustomValidity("Я никому не скажу наш секрет");
-            alert("Я никому не скажу наш секрет");
-        }else if(password.validity.tooShort){
-         
-            password.setCustomValidity("Слишком краток пароль");
-            alert("Слишком краток пароль");
-        }
-    }
-    function checkApples(applesValue){
-        if(applesValue == '0'){    
-            howMuchApples.setCustomValidity("Ну хоть покушай немного... Яблочки вкусные");
-            alert("Ну хоть покушай немного... Яблочки вкусные");
-        }else if(applesValue < 0){
-         
-            alert('Ты чего,сам сюда яблок принёс?')
-        }
-    }
-        
-        name.addEventListener('change', function (e){
-        
-            var nameValue = e.target.value;
-            if(!name.checkValidity() || nameValue == ''){
-                //  name.style.border = '1px solid red';
-                 name.setCustomValidity('Как тебя зовут дружище?!') 
-                 // alert('Как тебя зовут дружище?!');
-              }
-            // checkName(nameValue);
-            console.log(nameValue)
-        }, true)
-       
-        email.addEventListener('change', function(e){
-            var emailValue = e.target.value; 
-            checkEmail();
-        },false)
-       
-        password.addEventListener('change', function(e){
-            var passwordValue = e.target.value; 
-            checkPass();
-        }, false)
-       
-        howMuchApples.addEventListener('change',function(e){
-            var applesValue = e.target.value;
-            checkApples(applesValue);
-        },false)
-       
-        agree.addEventListener('click',function(){
-            if(agree.checked){
-              submit.disabled = false;      
-            }else{
-              alert()  
-              submit.disabled = true;
-            };
-          },false)
-
-        submit.addEventListener('click', function(e){
-            //   e.preventDefault();
-              console.log(myForm)
-              if(myForm){
-                  console.log('zaebok')
-
-              }
-          }, false)
-          
-        check.addEventListener('click', function(){
-              checkName();
-              checkEmail();
-              checkPass();
-              checkApples();
-
-
-        }, false)  */
+ 
     }) 
