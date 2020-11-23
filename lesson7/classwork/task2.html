@@ -116,7 +116,8 @@ render = (message) => {
     var divText = document.createElement('div');
         divText.className = 'message__text';
         divText.innerText = message.text;
-    li.appendChild(divText)
+    li.appendChild(divText);
+
     var divControls = document.createElement('div');
         divControls.className = 'message__controls';
     li.appendChild(divControls);
@@ -131,44 +132,13 @@ render = (message) => {
         answerButton.type = 'button';
         answerButton.className = '_answerMessage';
         answerButton.innerText = 'Answer'
-    li.appendChild(answerButton);
-
-    var answerLabel = document.createElement('label');
-        answerLabel.className = 'answer';
-    var answerTextArea = document.createElement('textarea');
-        answerTextArea.placeholder = 'Write  answer here, por favor';
-        answerTextArea.id = 'answerId';    
-        answerTextArea.required = true;
-    li.appendChild(answerLabel);
-    li.appendChild(answerTextArea);
+    li.appendChild(answerButton);   
     listOut.appendChild(li);
-        // <label for="message">
-        //   <span>Message</span>
-        //   <textarea placeholder="Your Message" id="message"></textarea>
-        // </label>
+ 
     message.skipMessage(li);
+    message.answerMessage(li,message);
 
-    var listItems = document.querySelectorAll('.listItem');
-    var listItemArray = Array.from(listItems);
-        for(var i = 0;i < listItemArray.length; i++ ){     
-          var answerBtn = listItemArray[i].querySelector('._answerMessage');
-        };   
-
-    answerBtn.addEventListener('click', function(e){
-          console.log('answer');
-          console.log(message.id)
-          var answerValue = li.querySelector('textarea').value;
-          var parentId = message.id;
-
-          var newAnswer = new Answer();
-              message.answer = li.querySelector('textarea').value ;
-              
-
-        });
-      
-    
-
- }
+  }
  
 class Message {
     constructor(author, text, answer){
@@ -177,32 +147,72 @@ class Message {
       this.text = text;
       this.date = new Date();
       this.answer = answer;
-      this.skipMessage = function skipMessage (li)  {
-        var listItems = document.querySelectorAll('.listItem');
-        var listItemArray = Array.from(listItems);
-        for(var i = 0;i < listItemArray.length; i++ ){     
-          var skipBtn = listItemArray[i].querySelector('._skipMessage');
-        };    
-        skipBtn.addEventListener('click', function(e){
-            console.log(li);
-            console.log(listOut.querySelector('li'))
-            listOut.removeChild(li);
-        });
-      }
-      this.answerMessage = function answerMessage(){
 
-      }
-    }
+      this.skipMessage = function skipMessage (li)  {
+          var listItems = document.querySelectorAll('.listItem');
+          var listItemArray = Array.from(listItems);
+          for(var i = 0;i < listItemArray.length; i++ ){     
+            var skipBtn = listItemArray[i].querySelector('._skipMessage');
+          };    
+          skipBtn.addEventListener('click', function(e){
+              console.log(li);
+              console.log(listOut.querySelector('li'))
+              listOut.removeChild(li);
+          });
+        }
+      
+      this.answerMessage = function answerMessage (li,message) {
+
+          var listItems = document.querySelectorAll('.listItem');
+          var listItemArray = Array.from(listItems);
+              for(var i = 0;i < listItemArray.length; i++ ){     
+                var answerBtn = listItemArray[i].querySelector('._answerMessage');
+              };   
+
+          answerBtn.addEventListener('click', function(){
+            var answerLabel = document.createElement('label');
+                answerLabel.className = 'answer';
+            var answerTextArea = document.createElement('textarea');
+                answerTextArea.placeholder = 'Write  answer here, por favor';
+                answerTextArea.id = 'answerId';    
+            var sendAnswerBtn = document.createElement('button');
+                sendAnswerBtn.className = 'sendAnswer';
+                sendAnswerBtn.innerText = 'Send Answer';
+            li.appendChild(sendAnswerBtn);        
+            li.appendChild(answerLabel);
+            li.appendChild(answerTextArea); 
+            message.sendAnswer(li,message)
+          }
+            
+          )}
+     
+      this.sendAnswer = function sendAnswer (li,message) {
+            
+            var sendAnswerBtn = li.querySelector('.sendAnswer'); 
+        sendAnswerBtn.addEventListener('click', function(){
+              console.log('answer');
+              console.log(message.id)
+              var answerValue = li.querySelector('textarea').value;
+              var parentId = message.id;
+              var answerText = message.text;
+              var answerAuthor = message.author;
+
+              var newAnswer = new Answer(answerAuthor,answerText, answerValue, parentId);              
+                  message.answer = newAnswer;
+              console.log(newAnswer)
+              console.log(li.querySelector('textarea'))
+              var clearTextArea = li.querySelector('textarea') ;
+              clearTextArea.value = '';
+        })
+      
+      };
+      }   
   }
 
-class Answer {
+class Answer extends Message {
     constructor(author, text, answer,parentId){
-      this.id = getRandomId(1,20);;
-      this.author = author,
-      this.text = text;
-      this.date = new Date();
+      super(author, text, answer);
       this.parentId = parentId;
-      this.answers = answer;
   }
 }
  
