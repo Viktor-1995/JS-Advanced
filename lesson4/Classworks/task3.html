@@ -49,7 +49,7 @@
         
           var listItems = document.querySelectorAll('.listItem');
           var listItemArray = Array.from(listItems);
-          //console.log(listItems)
+          console.log(listItems)
 
           for(var i = 0;i < listItemArray.length; i++ ){
              
@@ -60,6 +60,7 @@
 
             removeButton.addEventListener('click', function(e){
                 //console.log(spanText);
+                console.log(removeButton)
                 console.log(li)
                 toDoList.removeChild(li)
             });
