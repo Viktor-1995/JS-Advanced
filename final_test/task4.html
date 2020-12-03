@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .hide{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    1. При помощи fetch получить данные:
+     http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2
+    2. Полученый ответ преобразовать в json вызвав метод .json с объекта ответа
+    3. На основе данных посторить табличку
+
+    | index | company | email | phone | address |
+
+    4. создать кнопу которая скрывает показывает address
+     -->
+</body>
+<script>
+
+    fetch( 'http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2')
+        .then((response) => response.json())
+        .then((result) => {
+            console.log(result);
+           
+            var table = document.createElement("table");
+            table.innerHTML = `
+                <tr>  
+                    <th>index</th>
+                    <th> Company </th>
+                    <th> E-mail </th>
+                    <th> Phone </th>
+                    <th> Adress </th>
+                </tr>  
+            `;
+            for (var i = 0; i < result.length; i++) {
+            var tableRaw = document.createElement("tr");
+            tableRaw.className = "lists";
+            tableRaw.innerHTML = `
+                <td > ${result[i].index} </td>
+                <td> ${result[i].company} </td>
+                <td> ${result[i].email} </td>
+                <td >${result[i].phone} </td>
+                <td class = 'adress' >
+                    <button type = 'button' class = 'adressBtn'>push to show</button>
+                    <span class = 'hide'> ${result[i].address}</span> 
+                </td>
+                `;
+            table.appendChild(tableRaw);
+        }
+        document.body.appendChild(table);
+        var tablebtn = document.querySelector('table')
+        var adressBtn = tablebtn.querySelectorAll(".adressBtn");
+        var hide = tablebtn.querySelectorAll('span');
+        var hideArr = Array.from(hide)
+        console.log(hide)
+        // var adressField = tablebtn.querySelectorAll(".adress");
+        adressBtn.forEach( (btn, key) => {
+
+            btn.addEventListener('click', (e) => {
+                console.log(e)
+                hideArr[key].classList.toggle('hide');
+            })
+
+        });
+        })
+
+</script>
+</html>
