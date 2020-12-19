@@ -40,21 +40,33 @@
           width: 400px;
           
         }
-       ul{
+        ul{
          
            padding-left: 0px;
            width: 9999px;
           height: 400px;
           font-size: 0;
           transition: transform 0.6s ease;
-          /* transform: translateX(-600px); */
-       }
-       button{
-        position: absolute;
-        /* top: 60px; */
-        padding: 0;
-        display: block;
+         
         }
+        button{
+            background-color: lightgray;
+            position: absolute;
+            height:150px;
+            width:50px;
+            border: 2px solid grey;
+            border-radius: 50%;
+            display: block;
+            transition-duration: 0.5s;
+        }
+        button:hover {
+            background-color:grey;
+            color: white;
+            height:160px;
+            width:55px;
+
+        }
+         
         #showPrev{
             left:7px;
         }
@@ -62,9 +74,13 @@
             right:7px;
         }
         .slider_nav{
+            position: absolute;
             width:1400px;
-            height: 25px;
+            height:auto;
+            top:40%;
+
         }
+      
         a {
             display: inline-block;
             }
@@ -77,7 +93,7 @@
             top: 0;
             right: 0;
             bottom: 0;
-            /* padding: 8%; */
+            padding: 5% 5% 5% 0;
             background: #CCC center no-repeat;
             background: rgba(0, 0, 0, 0.5) center no-repeat;
             background-size: contain;
@@ -97,6 +113,7 @@
             <button class = "slider_prev" id = "showPrev">Prev</button>
             <button class = "slider_next" id = "showNext">Next</button>
         </div>
+        
         <div  class = "slider_wrap">
             <ul></ul>
         </div>
